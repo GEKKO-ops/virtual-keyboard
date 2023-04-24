@@ -1,0 +1,28 @@
+.key-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 5px;
+  background: #1e2631;
+  border-bottom: 1px solid #e7e7e7;
+  box-shadow: 0 3px 0 1px #d9d9d9;
+  border-radius: 5px;
+  color: #f8f9fb;
+  cursor: pointer;
+  user-select: none;
+}
+
+.keyboard {
+  max-width: 890px;
+  min-height: 100px;
+  background-color: #6e7783;
+  padding: 25px 10px 15px 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px;
+}

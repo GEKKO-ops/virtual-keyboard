@@ -1,27 +1,29 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": "airbnb-base",
-    "overrides": [
-        {
-            files: ['*.js'],
-            rules: {
-              'import/extensions': [
-                'error',
-                'always',
-                {
-                  ignorePackages: true,
-                },
-              ],
-            },
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: 'airbnb-base',
+  overrides: [
+    {
+      files: ['*.js'],
+      rules: {
+        'import/extensions': [
+          'error',
+          'always',
+          {
+            ignorePackages: true,
           },
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+        ],
+      },
     },
-    "rules": {
-    }
-}
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  rules: {
+    'no-console': 0,
+    'import/extensions': 0,
+  },
+};
