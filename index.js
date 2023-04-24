@@ -27,6 +27,26 @@ const createKeys = () => {
   return fragment;
 };
 
+let activeElement = null;
+
+const typedBtn = (textareaElem) => {
+  const { type } = activeElement.dataset;
+  const textarea = textareaElem;
+
+  const pozStart = textarea.selectionStart;
+  const pozEnd = textarea.selectionEnd;
+  const valueLength = textarea.value.length;
+  const valueBefore = textarea.value.slice(0, pozStart);
+  const valueAfter = textarea.value.slice(pozEnd);
+
+  if (type === 'alphanumeric') {
+    textarea.value = valueBefore + activeElement.textContent + valueAfter;
+    textarea.focus();
+    const position = pozStart + activeElement.textContent.length;
+    textarea.setSelectionRange(position, position);
+  }
+};
+
 const createKeyboard = () => {
   const main = document.createElement('main');
   main.classList.add('main');
@@ -49,6 +69,37 @@ const createKeyboard = () => {
 
   const keys = createKeys();
   keyboard.append(keys);
-};
 
+  container.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.key-btn')) {
+      const activeElem = e.target.closest('.key-btn');
+      activeElem.classList.add('active');
+      activeElement = activeElem;
+      typedBtn(textarea);
+    }
+  });
+  container.addEventListener('mouseup', (e) => {
+    if (e.target.closest('.key-btn')) {
+      const activeElem = e.target.closest('.key-btn');
+      activeElem.classList.remove('active');
+      textarea.focus();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    e.preventDefault();
+    const activeBtn = document.querySelector(`[data-code="${e.code}"]`);
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+      activeElement = activeBtn;
+      typedBtn(textarea);
+    }
+  });
+  document.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    const activeBtn = document.querySelector(`[data-code="${e.code}"]`);
+    if (activeBtn) {
+      activeBtn.classList.remove('active');
+    }
+  });
+};
 createKeyboard();
