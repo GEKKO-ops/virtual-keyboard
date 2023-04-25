@@ -141,6 +141,69 @@ const keyMap = {
     text: 'Del',
     type: 'del',
   },
+  CapsLock: {
+    text: 'Caps Lock',
+    type: 'capsLock',
+  },
+  KeyA: {
+    en: { shiftOff: 'a', shiftOn: 'A' },
+    ru: { shiftOff: 'ф', shiftOn: 'Ф' },
+    type: 'alphanumeric',
+  },
+  KeyS: {
+    en: { shiftOff: 's', shiftOn: 'S' },
+    ru: { shiftOff: 'ы', shiftOn: 'Ы' },
+    type: 'alphanumeric',
+  },
+  KeyD: {
+    en: { shiftOff: 'd', shiftOn: 'D' },
+    ru: { shiftOff: 'в', shiftOn: 'В' },
+    type: 'alphanumeric',
+  },
+  KeyF: {
+    en: { shiftOff: 'f', shiftOn: 'F' },
+    ru: { shiftOff: 'а', shiftOn: 'А' },
+    type: 'alphanumeric',
+  },
+  KeyG: {
+    en: { shiftOff: 'g', shiftOn: 'G' },
+    ru: { shiftOff: 'п', shiftOn: 'П' },
+    type: 'alphanumeric',
+  },
+  KeyH: {
+    en: { shiftOff: 'h', shiftOn: 'H' },
+    ru: { shiftOff: 'р', shiftOn: 'Р' },
+    type: 'alphanumeric',
+  },
+  KeyJ: {
+    en: { shiftOff: 'j', shiftOn: 'J' },
+    ru: { shiftOff: 'о', shiftOn: 'О' },
+    type: 'alphanumeric',
+  },
+  KeyK: {
+    en: { shiftOff: 'k', shiftOn: 'K' },
+    ru: { shiftOff: 'л', shiftOn: 'Л' },
+    type: 'alphanumeric',
+  },
+  KeyL: {
+    en: { shiftOff: 'l', shiftOn: 'L' },
+    ru: { shiftOff: 'д', shiftOn: 'Д' },
+    type: 'alphanumeric',
+  },
+  Semicolon: {
+    en: { shiftOff: ';', shiftOn: ':' },
+    ru: { shiftOff: 'ж', shiftOn: 'Ж' },
+    type: 'alphanumeric',
+  },
+  Quote: {
+    en: { shiftOff: '\'', shiftOn: '"' },
+    ru: { shiftOff: 'э', shiftOn: 'Э' },
+    type: 'alphanumeric',
+  },
+  Enter: {
+    text: 'Enter',
+    type: 'enter',
+  },
 };
 
 export default keyMap;

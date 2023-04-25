@@ -105,6 +105,11 @@ button {
   width: 145px;
 }
 
+.capsLock,
+.enter {
+  width: 119px;
+}
+
 .tab,
 .del {
   width: 60px;
@@ -124,7 +129,8 @@ button {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px;
 }
 
-.active {
+.active,
+.active-caps {
   background: #eeeded;
   color: #414141;
   position: relative;

@@ -27,6 +27,7 @@ const createKeys = () => {
 };
 
 let activeElement = null;
+let capsLock = false;
 
 const typedBtn = (textareaElem) => {
   const { type } = activeElement.dataset;
@@ -82,6 +83,40 @@ const typedBtn = (textareaElem) => {
       textarea.setSelectionRange(position, position);
     }
   }
+  if (type === 'enter') {
+    const enterText = '\n';
+    textarea.value = textBefore + enterText + textAfter;
+    textarea.focus();
+    const position = pozStart + enterText.length;
+    textarea.setSelectionRange(position, position);
+  }
+};
+
+const toggleCapsLock = (alphanumeric) => {
+  capsLock = !capsLock;
+  alphanumeric.forEach((item) => {
+    const btn = item;
+    if (capsLock) {
+      btn.textContent = item.textContent.toUpperCase();
+    } else {
+      btn.textContent = item.textContent.toLowerCase();
+    }
+  });
+};
+
+const capsLockOn = (capsLockBtn, alphanumeric) => {
+  capsLockBtn.addEventListener('click', () => {
+    capsLockBtn.classList.toggle('active-caps');
+    toggleCapsLock(alphanumeric);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    e.preventDefault();
+    if (e.code === 'CapsLock') {
+      capsLockBtn.classList.toggle('active-caps');
+      toggleCapsLock(alphanumeric);
+    }
+  });
 };
 
 const createKeyboard = () => {
@@ -107,8 +142,12 @@ const createKeyboard = () => {
   const keys = createKeys();
   keyboard.append(keys);
 
+  const alphanumeric = document.querySelectorAll('[data-type="alphanumeric"]');
+  const capsLockBtn = document.querySelector('[data-type="capsLock"]');
+  capsLockOn(capsLockBtn, alphanumeric);
+
   container.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.key-btn')) {
+    if (e.target !== capsLockBtn && e.target.closest('.key-btn')) {
       const activeElem = e.target.closest('.key-btn');
       activeElem.classList.add('active');
       activeElement = activeElem;
@@ -116,7 +155,7 @@ const createKeyboard = () => {
     }
   });
   container.addEventListener('mouseup', (e) => {
-    if (e.target.closest('.key-btn')) {
+    if (e.target !== capsLockBtn && e.target.closest('.key-btn')) {
       const activeElem = e.target.closest('.key-btn');
       activeElem.classList.remove('active');
       textarea.focus();
@@ -125,7 +164,7 @@ const createKeyboard = () => {
   document.addEventListener('keydown', (e) => {
     e.preventDefault();
     const activeBtn = document.querySelector(`[data-code="${e.code}"]`);
-    if (activeBtn) {
+    if (e.code !== 'CapsLock' && activeBtn) {
       activeBtn.classList.add('active');
       activeElement = activeBtn;
       typedBtn(textarea);
@@ -134,7 +173,7 @@ const createKeyboard = () => {
   document.addEventListener('keyup', (e) => {
     e.preventDefault();
     const activeBtn = document.querySelector(`[data-code="${e.code}"]`);
-    if (activeBtn) {
+    if (e.code !== 'CapsLock' && activeBtn) {
       activeBtn.classList.remove('active');
     }
   });
