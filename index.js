@@ -5,14 +5,12 @@ const language = 'en';
 const createKeys = () => {
   const lang = language;
   const keyArr = Object.keys(keyMap);
-  console.log(keyArr);
   const fragment = document.createDocumentFragment();
 
   keyArr.forEach((key) => {
     const keyBtn = document.createElement('div');
     keyBtn.classList.add('key-btn');
     const keyItem = keyMap[key];
-    console.log(keyItem);
 
     keyBtn.setAttribute('data-code', key);
     keyBtn.setAttribute('data-type', keyItem.type);
@@ -21,6 +19,7 @@ const createKeys = () => {
       keyBtn.textContent = keyItem[lang].shiftOff;
     } else {
       keyBtn.textContent = keyItem.text;
+      keyBtn.classList.add(`${keyItem.type}`);
     }
     fragment.append(keyBtn);
   });
@@ -35,15 +34,53 @@ const typedBtn = (textareaElem) => {
 
   const pozStart = textarea.selectionStart;
   const pozEnd = textarea.selectionEnd;
-  const valueLength = textarea.value.length;
-  const valueBefore = textarea.value.slice(0, pozStart);
-  const valueAfter = textarea.value.slice(pozEnd);
+  const textLength = textarea.value.length;
+  const textBefore = textarea.value.slice(0, pozStart);
+  const textAfter = textarea.value.slice(pozEnd);
 
   if (type === 'alphanumeric') {
-    textarea.value = valueBefore + activeElement.textContent + valueAfter;
+    textarea.value = textBefore + activeElement.textContent + textAfter;
     textarea.focus();
     const position = pozStart + activeElement.textContent.length;
     textarea.setSelectionRange(position, position);
+  }
+  if (type === 'backspace') {
+    if (pozStart !== pozEnd) {
+      textarea.value = textBefore + textAfter;
+      textarea.focus();
+      const position = pozStart;
+      textarea.setSelectionRange(position, position);
+    } else if (pozStart === 0) {
+      return;
+    } else {
+      textarea.value = textarea.value.slice(0, pozStart - 1) + textAfter;
+      textarea.focus();
+      const position = pozStart - 1;
+      textarea.setSelectionRange(position, position);
+    }
+  }
+  if (type === 'tab') {
+    const tabText = '    ';
+    textarea.value = textBefore + tabText + textAfter;
+    textarea.focus();
+    const position = pozStart + tabText.length;
+    textarea.setSelectionRange(position, position);
+  }
+  if (type === 'del') {
+    if (pozStart === textLength) {
+      return;
+    }
+    if (pozStart !== pozEnd) {
+      textarea.value = textBefore + textAfter;
+      textarea.focus();
+      const position = pozStart;
+      textarea.setSelectionRange(position, position);
+    } else {
+      textarea.value = textBefore + textarea.value.slice(pozEnd + 1);
+      textarea.focus();
+      const position = pozStart;
+      textarea.setSelectionRange(position, position);
+    }
   }
 };
 

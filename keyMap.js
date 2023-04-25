@@ -64,6 +64,83 @@ const keyMap = {
     ru: { shiftOff: '=', shiftOn: '+' },
     type: 'alphanumeric',
   },
+  Backspace: {
+    text: 'Backspace',
+    type: 'backspace',
+  },
+  Tab: {
+    text: 'Tab',
+    type: 'tab',
+  },
+  KeyQ: {
+    en: { shiftOff: 'q', shiftOn: 'Q' },
+    ru: { shiftOff: 'й', shiftOn: 'Й' },
+    type: 'alphanumeric',
+  },
+  KeyW: {
+    en: { shiftOff: 'w', shiftOn: 'W' },
+    ru: { shiftOff: 'ц', shiftOn: 'Ц' },
+    type: 'alphanumeric',
+  },
+  KeyE: {
+    en: { shiftOff: 'e', shiftOn: 'E' },
+    ru: { shiftOff: 'у', shiftOn: 'У' },
+    type: 'alphanumeric',
+  },
+  KeyR: {
+    en: { shiftOff: 'r', shiftOn: 'R' },
+    ru: { shiftOff: 'к', shiftOn: 'К' },
+    type: 'alphanumeric',
+  },
+  KeyT: {
+    en: { shiftOff: 't', shiftOn: 'T' },
+    ru: { shiftOff: 'е', shiftOn: 'Е' },
+    type: 'alphanumeric',
+  },
+  KeyY: {
+    en: { shiftOff: 'y', shiftOn: 'Y' },
+    ru: { shiftOff: 'н', shiftOn: 'Н' },
+    type: 'alphanumeric',
+  },
+  KeyU: {
+    en: { shiftOff: 'u', shiftOn: 'U' },
+    ru: { shiftOff: 'г', shiftOn: 'Г' },
+    type: 'alphanumeric',
+  },
+  KeyI: {
+    en: { shiftOff: 'i', shiftOn: 'I' },
+    ru: { shiftOff: 'ш', shiftOn: 'Ш' },
+    type: 'alphanumeric',
+  },
+  KeyO: {
+    en: { shiftOff: 'o', shiftOn: 'O' },
+    ru: { shiftOff: 'щ', shiftOn: 'Щ' },
+    type: 'alphanumeric',
+  },
+  KeyP: {
+    en: { shiftOff: 'p', shiftOn: 'P' },
+    ru: { shiftOff: 'з', shiftOn: 'З' },
+    type: 'alphanumeric',
+  },
+  BracketLeft: {
+    en: { shiftOff: '[', shiftOn: '{' },
+    ru: { shiftOff: 'х', shiftOn: 'Х' },
+    type: 'alphanumeric',
+  },
+  BracketRight: {
+    en: { shiftOff: ']', shiftOn: '}' },
+    ru: { shiftOff: 'ъ', shiftOn: 'Ъ' },
+    type: 'alphanumeric',
+  },
+  Backslash: {
+    en: { shiftOff: '\\', shiftOn: '|' },
+    ru: { shiftOff: '\\', shiftOn: '/' },
+    type: 'alphanumeric',
+  },
+  Delete: {
+    text: 'Del',
+    type: 'del',
+  },
 };
 
 export default keyMap;
