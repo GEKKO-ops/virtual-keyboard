@@ -204,6 +204,103 @@ const keyMap = {
     text: 'Enter',
     type: 'enter',
   },
+  ShiftLeft: {
+    text: 'Shift',
+    type: 'shift',
+  },
+  KeyZ: {
+    en: { shiftOff: 'z', shiftOn: 'Z' },
+    ru: { shiftOff: 'я', shiftOn: 'Я' },
+    type: 'alphanumeric',
+  },
+  KeyX: {
+    en: { shiftOff: 'x', shiftOn: 'X' },
+    ru: { shiftOff: 'ч', shiftOn: 'Ч' },
+    type: 'alphanumeric',
+  },
+  KeyC: {
+    en: { shiftOff: 'c', shiftOn: 'C' },
+    ru: { shiftOff: 'с', shiftOn: 'С' },
+    type: 'alphanumeric',
+  },
+  KeyV: {
+    en: { shiftOff: 'v', shiftOn: 'V' },
+    ru: { shiftOff: 'м', shiftOn: 'М' },
+    type: 'alphanumeric',
+  },
+  KeyB: {
+    en: { shiftOff: 'b', shiftOn: 'B' },
+    ru: { shiftOff: 'и', shiftOn: 'И' },
+    type: 'alphanumeric',
+  },
+  KeyN: {
+    en: { shiftOff: 'n', shiftOn: 'N' },
+    ru: { shiftOff: 'т', shiftOn: 'Т' },
+    type: 'alphanumeric',
+  },
+  KeyM: {
+    en: { shiftOff: 'm', shiftOn: 'M' },
+    ru: { shiftOff: 'ь', shiftOn: 'Ь' },
+    type: 'alphanumeric',
+  },
+  Comma: {
+    en: { shiftOff: ',', shiftOn: '<' },
+    ru: { shiftOff: 'б', shiftOn: 'Б' },
+    type: 'alphanumeric',
+  },
+  Period: {
+    en: { shiftOff: '.', shiftOn: '>' },
+    ru: { shiftOff: 'ю', shiftOn: 'Ю' },
+    type: 'alphanumeric',
+  },
+  Slash: {
+    en: { shiftOff: '/', shiftOn: '?' },
+    ru: { shiftOff: '.', shiftOn: ',' },
+    type: 'alphanumeric',
+  },
+  ArrowUp: {
+    type: 'arrowUp',
+    text: '↑',
+  },
+  ShiftRight: {
+    text: 'Shift',
+    type: 'shift',
+  },
+  ControlLeft: {
+    text: 'Ctrl',
+    type: 'controlLeft',
+  },
+  MetaLeft: {
+    text: 'Win',
+    type: 'functional',
+  },
+  AltLeft: {
+    text: 'Alt',
+    type: 'altLeft',
+  },
+  Space: {
+    type: 'space',
+  },
+  AltRight: {
+    text: 'Alt',
+    type: 'altRight',
+  },
+  ArrowLeft: {
+    type: 'arrowLeft',
+    text: '←',
+  },
+  ArrowDown: {
+    type: 'arrowDown',
+    text: '↓',
+  },
+  ArrowRight: {
+    type: 'arrowRight',
+    text: '→',
+  },
+  ControlRight: {
+    text: 'Ctrl',
+    type: 'controlRight',
+  },
 };
 
 export default keyMap;

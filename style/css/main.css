@@ -106,13 +106,20 @@ button {
 }
 
 .capsLock,
-.enter {
+.enter,
+.shift {
   width: 119px;
 }
 
 .tab,
-.del {
+.del,
+.controlRight,
+.controlLeft {
   width: 60px;
+}
+
+.space {
+  width: 405px;
 }
 
 .keyboard {

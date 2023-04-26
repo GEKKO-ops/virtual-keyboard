@@ -38,6 +38,8 @@ const typedBtn = (textareaElem) => {
   const textLength = textarea.value.length;
   const textBefore = textarea.value.slice(0, pozStart);
   const textAfter = textarea.value.slice(pozEnd);
+  const textBeforeCursor = textarea.value.substring(0, pozStart);
+  const textAfterCursor = textarea.value.substring(pozStart);
 
   if (type === 'alphanumeric') {
     textarea.value = textBefore + activeElement.textContent + textAfter;
@@ -90,6 +92,29 @@ const typedBtn = (textareaElem) => {
     const position = pozStart + enterText.length;
     textarea.setSelectionRange(position, position);
   }
+  if (type === 'arrowUp') {
+    textarea.focus();
+    const position = textBeforeCursor.replace(/\n[^\n]*$/, '').length;
+    textarea.setSelectionRange(position, position);
+  }
+  if (type === 'arrowDown') {
+    textarea.focus();
+    const position = pozStart + textAfterCursor.length - textAfterCursor.replace(/^[^\n]*\n?/, '').length;
+    textarea.setSelectionRange(position, position);
+  }
+  if (type === 'arrowLeft') {
+    if (pozStart === 0 && pozEnd === 0) {
+      return;
+    }
+    textarea.focus();
+    const position = pozStart - 1;
+    textarea.setSelectionRange(position, position);
+  }
+  if (type === 'arrowRight') {
+    textarea.focus();
+    const position = pozStart + 1;
+    textarea.setSelectionRange(position, position);
+  }
 };
 
 const toggleCapsLock = (alphanumeric) => {
@@ -119,6 +144,61 @@ const capsLockOn = (capsLockBtn, alphanumeric) => {
   });
 };
 
+const toUpperCase = (alphanumeric) => {
+  const lang = language;
+  alphanumeric.forEach((item) => {
+    const { code } = item.dataset;
+    const btn = item;
+    if (capsLock) {
+      btn.textContent = keyMap[code][lang].shiftOn.toLowerCase();
+    } else {
+      btn.textContent = keyMap[code][lang].shiftOn;
+    }
+  });
+};
+
+const toLowerCase = (alphanumeric) => {
+  const lang = language;
+  alphanumeric.forEach((item) => {
+    const { code } = item.dataset;
+    const btn = item;
+    if (capsLock) {
+      btn.textContent = keyMap[code][lang].shiftOff.toUpperCase();
+    } else {
+      btn.textContent = keyMap[code][lang].shiftOff;
+    }
+  });
+};
+
+const shiftOn = (shifts, alphanumeric) => {
+  shifts.forEach((shift) => {
+    shift.addEventListener('mousedown', () => {
+      shift.classList.add('active');
+      toUpperCase(alphanumeric);
+    });
+
+    shift.addEventListener('mouseup', () => {
+      shift.classList.remove('active');
+      toLowerCase(alphanumeric);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      e.preventDefault();
+      if (e.code === shift.dataset.code) {
+        shift.classList.add('active');
+        toUpperCase(alphanumeric);
+      }
+    });
+    document.addEventListener('keyup', (e) => {
+      e.preventDefault();
+      if (e.code === shift.dataset.code) {
+        shift.classList.remove('active');
+        toLowerCase(alphanumeric);
+      }
+    });
+  });
+};
+
 const createKeyboard = () => {
   const main = document.createElement('main');
   main.classList.add('main');
@@ -144,7 +224,10 @@ const createKeyboard = () => {
 
   const alphanumeric = document.querySelectorAll('[data-type="alphanumeric"]');
   const capsLockBtn = document.querySelector('[data-type="capsLock"]');
+  const shiftBtns = document.querySelectorAll('[data-type="shift"]');
+
   capsLockOn(capsLockBtn, alphanumeric);
+  shiftOn(shiftBtns, alphanumeric);
 
   container.addEventListener('mousedown', (e) => {
     if (e.target !== capsLockBtn && e.target.closest('.key-btn')) {
