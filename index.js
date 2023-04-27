@@ -226,6 +226,7 @@ const toggleLanguage = (alphanumeric) => {
 const changeLanguage = (ctrlBtn, altBtn, alphanumeric) => {
   const keyCode = [ctrlBtn.dataset.code, altBtn.dataset.code];
   const activeBtn = new Set();
+  const langBtn = document.querySelector('.lang-btn');
 
   document.addEventListener('keydown', (e) => {
     activeBtn.add(e.code);
@@ -237,10 +238,19 @@ const changeLanguage = (ctrlBtn, altBtn, alphanumeric) => {
     }
     activeBtn.clear();
     toggleLanguage(alphanumeric);
+    langBtn.innerText = language;
   });
 
   document.addEventListener('keyup', (e) => {
     activeBtn.delete(e.code);
+  });
+};
+
+const changeLanguageMouse = (alphanumeric) => {
+  const langBtn = document.querySelector('.lang-btn');
+  langBtn.addEventListener('click', () => {
+    toggleLanguage(alphanumeric);
+    langBtn.innerText = language;
   });
 };
 
@@ -261,7 +271,11 @@ const createKeyboard = () => {
   const title = document.createElement('h1');
   title.innerText = 'Virtual Keyboard';
   const subtitle = document.createElement('h2');
-  subtitle.innerText = 'The virtual keyboard was created in Windows OS. \n To switch the language, press left ctrl + alt';
+  subtitle.innerText = 'The virtual keyboard was created in Windows OS. \n To switch the language, press left ctrl + alt. \n To switch the language by using mouse, press this';
+  const langBtn = document.createElement('button');
+  langBtn.classList.add('lang-btn');
+  langBtn.innerText = `${language}`;
+  subtitle.append(langBtn);
   container.append(title, subtitle, textarea, keyboard);
 
   const keys = createKeys();
@@ -276,6 +290,7 @@ const createKeyboard = () => {
   capsLockOn(capsLockBtn, alphanumeric);
   shiftOn(shiftBtns, alphanumeric);
   changeLanguage(ctrlLeftBtn, altLeftBtn, alphanumeric);
+  changeLanguageMouse(alphanumeric);
 
   container.addEventListener('mousedown', (e) => {
     if (e.target !== capsLockBtn && e.target.closest('.key-btn')) {

@@ -69,6 +69,12 @@ button {
   gap: 50px;
 }
 
+.lang-btn {
+  margin-left: 10px;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
 .textarea {
   width: 992px;
   height: 250px;
