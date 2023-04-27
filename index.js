@@ -1,6 +1,13 @@
 import keyMap from './keyMap.js';
 
-const language = 'en';
+let language = localStorage.getItem('language');
+
+const getLocalStorage = () => {
+  if (localStorage.getItem('language')) {
+    language = localStorage.getItem('language');
+  }
+};
+window.addEventListener('load', getLocalStorage);
 
 const createKeys = () => {
   const lang = language;
@@ -208,6 +215,12 @@ const toggleLanguage = (alphanumeric) => {
     btn.textContent = keyMap[code][lang].shiftOff.toUpperCase();
     btn.textContent = keyMap[code][lang].shiftOff;
   });
+  if (localStorage.getItem('language')) {
+    localStorage.language = lang;
+  } else {
+    localStorage.setItem('language', lang);
+  }
+  language = lang;
 };
 
 const changeLanguage = (ctrlBtn, altBtn, alphanumeric) => {
