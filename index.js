@@ -115,6 +115,12 @@ const typedBtn = (textareaElem) => {
     const position = pozStart + 1;
     textarea.setSelectionRange(position, position);
   }
+  if (type === 'space') {
+    textarea.value = `${textBefore} ${textAfter}`;
+    textarea.focus();
+    const position = pozStart + 1;
+    textarea.setSelectionRange(position, position);
+  }
 };
 
 const toggleCapsLock = (alphanumeric) => {
@@ -149,11 +155,8 @@ const toUpperCase = (alphanumeric) => {
   alphanumeric.forEach((item) => {
     const { code } = item.dataset;
     const btn = item;
-    if (capsLock) {
-      btn.textContent = keyMap[code][lang].shiftOn.toLowerCase();
-    } else {
-      btn.textContent = keyMap[code][lang].shiftOn;
-    }
+    btn.textContent = keyMap[code][lang].shiftOn.toLowerCase();
+    btn.textContent = keyMap[code][lang].shiftOn;
   });
 };
 
@@ -162,11 +165,8 @@ const toLowerCase = (alphanumeric) => {
   alphanumeric.forEach((item) => {
     const { code } = item.dataset;
     const btn = item;
-    if (capsLock) {
-      btn.textContent = keyMap[code][lang].shiftOff.toUpperCase();
-    } else {
-      btn.textContent = keyMap[code][lang].shiftOff;
-    }
+    btn.textContent = keyMap[code][lang].shiftOff.toUpperCase();
+    btn.textContent = keyMap[code][lang].shiftOff;
   });
 };
 
@@ -199,6 +199,38 @@ const shiftOn = (shifts, alphanumeric) => {
   });
 };
 
+const toggleLanguage = (alphanumeric) => {
+  const lang = language === 'en' ? 'ru' : 'en';
+
+  alphanumeric.forEach((item) => {
+    const { code } = item.dataset;
+    const btn = item;
+    btn.textContent = keyMap[code][lang].shiftOff.toUpperCase();
+    btn.textContent = keyMap[code][lang].shiftOff;
+  });
+};
+
+const changeLanguage = (ctrlBtn, altBtn, alphanumeric) => {
+  const keyCode = [ctrlBtn.dataset.code, altBtn.dataset.code];
+  const activeBtn = new Set();
+
+  document.addEventListener('keydown', (e) => {
+    activeBtn.add(e.code);
+
+    for (let i = 0; i < keyCode.length; i += 1) {
+      if (!activeBtn.has(keyCode[i])) {
+        return;
+      }
+    }
+    activeBtn.clear();
+    toggleLanguage(alphanumeric);
+  });
+
+  document.addEventListener('keyup', (e) => {
+    activeBtn.delete(e.code);
+  });
+};
+
 const createKeyboard = () => {
   const main = document.createElement('main');
   main.classList.add('main');
@@ -225,9 +257,12 @@ const createKeyboard = () => {
   const alphanumeric = document.querySelectorAll('[data-type="alphanumeric"]');
   const capsLockBtn = document.querySelector('[data-type="capsLock"]');
   const shiftBtns = document.querySelectorAll('[data-type="shift"]');
+  const ctrlLeftBtn = document.querySelector('[data-type="controlLeft"]');
+  const altLeftBtn = document.querySelector('[data-type="altLeft"]');
 
   capsLockOn(capsLockBtn, alphanumeric);
   shiftOn(shiftBtns, alphanumeric);
+  changeLanguage(ctrlLeftBtn, altLeftBtn, alphanumeric);
 
   container.addEventListener('mousedown', (e) => {
     if (e.target !== capsLockBtn && e.target.closest('.key-btn')) {
