@@ -1,6 +1,6 @@
 import keyMap from './keyMap.js';
 
-let language = localStorage.getItem('language');
+let language = localStorage.getItem('language') ? localStorage.getItem('language') : 'en';
 
 const getLocalStorage = () => {
   if (localStorage.getItem('language')) {
@@ -324,4 +324,5 @@ const createKeyboard = () => {
     }
   });
 };
+
 createKeyboard();
